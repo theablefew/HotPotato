@@ -93,7 +93,7 @@ module HotPotato
         f.write "#{Process.pid}\n"
       end    
       STDIN.reopen '/dev/null'
-      STDOUT.reopen LOG_FILE, 'a'
+      STDOUT.reopen ("#{APP_PATH}/#{config['supervisor_log']}" || LOG_FILE), 'a'
       STDERR.reopen STDOUT
       STDOUT.sync = true
       STDERR.sync = true
