@@ -30,12 +30,12 @@ module HotPotato
     end
       
     def queue_inject(name, message)
-      @@queue ||= Redis.new :host => config['redis_hostname'], :port => config['redis_port']
+      @@queue ||= Redis.new :host => config['redis_hostname'], :port => config['redis_port'], :db => config['redis_db']
       @@queue.rpush name.to_sym, Snappy.deflate(message.to_json)
     end
     
     def queue_subscribe(name, &block) 
-      queue ||= Redis.new :host => config['redis_hostname'], :port => config['redis_port']
+      queue ||= Redis.new :host => config['redis_hostname'], :port => config['redis_port'], :db => config['redis_db']
       while true
         message = queue.blpop(name.first.to_sym, 0).tap do |channel, message|
           yield JSON.parse(Snappy.inflate(message))
