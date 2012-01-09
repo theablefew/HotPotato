@@ -5,8 +5,8 @@ module HotPotato
     include HotPotato::Core
     
     def initialize
-      log.info "Initializing connection to Redis (#{config['redis_hostname']}:#{config['redis_port']})"
-      @@redis ||= Redis.new :host => config['redis_hostname'], :port => config['redis_port'], :db => config['redis_db']
+      log.info "Initializing connection to Redis (#{config['redis']}))"
+      @@redis ||= Redis.new config['redis'] #:host => config['redis_hostname'], :port => config['redis_port'], :db => config['redis_db']
     end
     
     def get(k)
