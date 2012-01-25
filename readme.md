@@ -215,9 +215,12 @@ AppTasks can be limited to a specific server (or set of servers) by creating a g
 config/config.yml file:
 
 ```yaml
-development:
-  redis_hostname: localhost
-  redis_port: 6379
+development: &development
+  redis:
+    :hostname: localhost
+    :port: 6379
+    :db: 0
+  supervisor_log: log/supervisor.log
   servers:
     - hostname: worker01
       group: incoming
