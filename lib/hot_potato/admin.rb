@@ -40,7 +40,7 @@ module HotPotato
     dir = File.dirname(File.expand_path(__FILE__))
 
     set :views,  "#{dir}/admin/views"
-    set :public, "#{dir}/admin/public"
+    set :public_folder, "#{dir}/admin/public"
     set :static, true
     
     helpers do
