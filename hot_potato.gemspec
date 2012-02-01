@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'json',    "~> 1.5.3"
   s.add_dependency 'redis',   "~> 2.2.1"
   s.add_dependency 'bunny',   "~> 0.6.0"
-  s.add_dependency 'sinatra', "~> 1.2.6"
+  s.add_dependency 'sinatra', "~> 1.3.2"
   s.add_dependency "vegas",   "~> 0.1.8"
   s.add_dependency "snappy",  "~> 0.0.2"
 
