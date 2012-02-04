@@ -67,8 +67,8 @@ module HotPotato
           sleep (5 + rand(5))
         end
       rescue Exception
-        log.error $!
-        log.error $@
+        log.error $ERROR_INFO
+        log.error $ERROR_BACKTRACE
         exit 1
       end
     end    

@@ -38,7 +38,10 @@ module HotPotato
             obj.start
           end
         rescue Exception
+          log.fatal "\n ERROR:: #{Time.now}\n"
           log.fatal $!
+          log.fatal $@.join("\n")
+          log.fatal "\n"
           exit 1
         end
       else
