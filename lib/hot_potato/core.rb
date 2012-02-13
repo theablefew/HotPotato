@@ -9,16 +9,16 @@ module HotPotato
 
     def set_logger(provider, options = {})
       if provider == :queue_logger
-        @@log ||= QueueLogger.new(options)
+        @@hot_potato_log ||= QueueLogger.new(options)
       else
-        @@log ||= Logger.new(STDOUT)
+        @@hot_potato_log ||= Logger.new(STDOUT)
       end
     end
 
     def log
-      @@log ||= Logger.new(STDOUT)
-      @@log.level = Logger::INFO
-      return @@log
+      @@hot_potato_log ||= Logger.new(STDOUT)
+      @@hot_potato_log.level = Logger::INFO
+      return @@hot_potato_log
     end
 
     def config

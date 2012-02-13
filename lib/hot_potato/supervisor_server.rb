@@ -53,7 +53,7 @@ module HotPotato
                   log.info "Starting AppTask [#{classify(app_task.classname)}]"
                   pid = fork do
                     Process.setsid
-                    exec "#{APP_PATH}/bin/app_task #{app_task.classname.to_s}"
+                    exec "#{APP_PATH}/bin/app_task #{app_task.classname.to_s} #{@options.mode}"
                   end
                   Process.detach pid
                   sleep 2
@@ -178,6 +178,7 @@ module HotPotato
         log.info "Thread created for Supervisor [Log]"
         queue_subscribe("hotpotato.log.#{@options.hostname}") do |m|
           log_entry = JSON.parse(m)
+          log.info "#{log}"
           if log.respond_to?(log_entry["severity"].to_sym)
             log.send(log_entry["severity"].to_sym, "#{log_entry['classname']} [#{log_entry['pid']}] - #{log_entry['message']}")
           end
