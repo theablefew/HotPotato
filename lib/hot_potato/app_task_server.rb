@@ -28,7 +28,6 @@ module HotPotato
     def run
       $0 = "Hot Potato AppTask [#{classify(@options.app_task_name)}]"
       log.info "Starting Hot Potato AppTask #{HotPotato::VERSION} #{classify(@options.app_task_name)}"
-      log.info "LOG: #{@log}"
       app_task = @options.routes.find @options.app_task_name
       if app_task
         obj = Kernel.const_get(classify(app_task.classname)).new

@@ -176,11 +176,12 @@ module HotPotato
     def start_log_service
       Thread.new do
         log.info "Thread created for Supervisor [Log]"
-        queue_subscribe("hotpotato.log.#{@options.hostname}") do |m|
-          log_entry = JSON.parse(m)
-          log.info "#{log}"
-          if log.respond_to?(log_entry["severity"].to_sym)
-            log.send(log_entry["severity"].to_sym, "#{log_entry['classname']} [#{log_entry['pid']}] - #{log_entry['message']}")
+        queue_subscribe([underscore("hotpotato.log.#{@options.hostname}")]) do |m|
+          log_entry = m
+          unless log_entry.blank?
+            if log.respond_to?(log_entry["severity"].to_sym)
+              log.send(log_entry["severity"].to_sym, "#{log_entry['classname']} [#{log_entry['pid']}] - #{log_entry['message']}")
+            end
           end
         end
       end

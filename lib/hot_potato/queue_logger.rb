@@ -19,7 +19,7 @@ module HotPotato
       log_entry[:pid]        = Process.pid
       log_entry[:classname]  = @classname
       
-      queue_inject "hotpotato.log.#{log_entry[:host]}", log_entry.to_json
+      queue_inject underscore("hotpotato.log.#{log_entry[:host]}"), log_entry
     end
   
     def debug(m); log m, __method__; end
