@@ -180,7 +180,7 @@ module HotPotato
           log_entry = m
           unless log_entry.blank?
             if log.respond_to?(log_entry["severity"].to_sym)
-              log.send(log_entry["severity"].to_sym, "#{log_entry['classname']} [#{log_entry['pid']}] - #{log_entry['message']}")
+              log.send(log_entry["severity"].to_sym, "#{log_entry['created_at']} :: #{log_entry['classname']} [#{log_entry['pid']}] - #{log_entry['message']}")
             end
           end
         end
