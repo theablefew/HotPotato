@@ -14,13 +14,15 @@ module HotPotato
    
    # Used to keep AppTask statistics when a message is received.
    def count_message_in
-     stat.incr "hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_in"
+     m_in = stat.incr "hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_in"
+     stat.publish( "messages_in", {"hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_in".gsub('.','_') => m_in.to_s}.to_json )
      stat.expire "hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_in", MESSAGE_COUNT_EXPIRE
    end
    
    # Used to keep AppTask statistics when a message is sent.
    def count_message_out
-     stat.incr "hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_out"     
+     m_out = stat.incr "hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_out"     
+     stat.publish( "messages_out", {"hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_out".gsub('.','_') => m_out.to_s}.to_json) 
      stat.expire "hotpotato.counter.apptask.#{Socket.gethostname}.#{self.class.name}.#{Process.pid}.messages_out", MESSAGE_COUNT_EXPIRE
    end
    

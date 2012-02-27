@@ -39,6 +39,10 @@ module HotPotato
     def incr(k)
       @@redis.incr(k)
     end
+
+    def publish( channel, k )
+      @@redis.publish( channel, k )
+    end
     
   end
   
