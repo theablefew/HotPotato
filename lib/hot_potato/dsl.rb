@@ -60,7 +60,7 @@ module HotPotato
       def initialize
         @faucets = []
         @workers = []
-        @sinks = []      
+        @sinks = []
       end
   
       def find(name)
@@ -137,7 +137,8 @@ module HotPotato
       end
       
       def running_instances
-        stat.keys("hotpotato.apptask.*.#{classify(@classname)}.*").count || 0
+        hostname = Socket.gethostname
+        stat.keys("hotpotato.apptask.#{hostname}.#{classify(@classname)}.*").count || 0
       end
       
       def type
